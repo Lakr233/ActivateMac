@@ -7,17 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		50C2DDE62833BC1B004390B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50C2DDE42833BC1B004390B4 /* Main.storyboard */; };
-		50C2DDEE2833BC23004390B4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C2DDED2833BC23004390B4 /* main.swift */; };
 		50D65F662833C77E00B0909B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50D65F652833C77E00B0909B /* Assets.xcassets */; };
+		CC25D3502833E6E500AF4E8B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC25D34F2833E6E500AF4E8B /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		50C2DDDB2833BC1B004390B4 /* Activate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Activate.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		50C2DDE52833BC1B004390B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		50C2DDED2833BC23004390B4 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		50CAAA4C2833C9980005E2B9 /* Activate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Activate.entitlements; sourceTree = "<group>"; };
 		50D65F652833C77E00B0909B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CC25D34F2833E6E500AF4E8B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				50CAAA4C2833C9980005E2B9 /* Activate.entitlements */,
-				50C2DDED2833BC23004390B4 /* main.swift */,
-				50C2DDE42833BC1B004390B4 /* Main.storyboard */,
+				CC25D34F2833E6E500AF4E8B /* main.m */,
 				50D65F652833C77E00B0909B /* Assets.xcassets */,
 			);
 			path = Activate;
@@ -86,10 +83,11 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					50C2DDDA2833BC1B004390B4 = {
 						CreatedOnToolsVersion = 13.2.1;
+						LastSwiftMigration = 1330;
 					};
 				};
 			};
@@ -117,7 +115,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				50D65F662833C77E00B0909B /* Assets.xcassets in Resources */,
-				50C2DDE62833BC1B004390B4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,22 +125,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50C2DDEE2833BC23004390B4 /* main.swift in Sources */,
+				CC25D3502833E6E500AF4E8B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		50C2DDE42833BC1B004390B4 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				50C2DDE52833BC1B004390B4 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		50C2DDE82833BC1B004390B4 /* Debug */ = {
@@ -266,7 +252,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Activate/Activate.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -274,7 +262,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -285,6 +272,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = wiki.qaq.Activate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -294,7 +282,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Activate/Activate.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -302,7 +292,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
