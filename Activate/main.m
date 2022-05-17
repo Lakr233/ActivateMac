@@ -41,6 +41,13 @@
                                              selector:@selector(bootstrap)
                                                  name:NSApplicationDidChangeScreenParametersNotification
                                                object:nil];
+    
+    // To show dock icon, comment this line.
+    [NSApp setActivationPolicy:NSApplicationActivationPolicyAccessory];
+}
+
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
+    return YES;
 }
 
 - (void)bootstrap {
@@ -81,11 +88,18 @@
     [self setBackgroundColor:[NSColor clearColor]];
     [self setIgnoresMouseEvents:YES];
     [self setMovable:NO];
-    [self setMovableByWindowBackground:NO];
     [self setCollectionBehavior:0x101];
     [self setLevel:2005];
     [self setHasShadow:NO];
     return self;
+}
+
+- (BOOL)canBecomeKeyWindow {
+    return NO;
+}
+
+- (BOOL)canBecomeMainWindow {
+    return NO;
 }
 
 @end
@@ -118,9 +132,7 @@
 @implementation AppView
 
 - (instancetype)init {
-    self = [super initWithFrame:CGRectZero];
-    [self setWantsLayer:YES];
-    return self;
+    return [super initWithFrame:CGRectZero];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
