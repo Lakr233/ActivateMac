@@ -1,6 +1,6 @@
 # Activate Mac
 
-The "Activate Windows" watermark ported to macOS with Swift.
+The "Activate Windows" watermark ported to macOS with ~~Swift~~ Objective-C.
 
 Special thanks: [MrGlockenspiel/activate-linux](https://github.com/MrGlockenspiel/activate-linux) for the idea.
 
