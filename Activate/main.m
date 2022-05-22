@@ -135,14 +135,30 @@
     return [super initWithFrame:CGRectZero];
 }
 
+- (NSArray<NSString *>*)getString {
+    NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+    NSArray *languages = [defs objectForKey:@"AppleLanguages"];
+    NSString *dLanguage = [languages objectAtIndex:0];
+    if ([dLanguage isEqualToString:@"zh-Hans"]) {
+        return @[@"激活macOS", @"您当前所使用的可能是盗版macOS副本，请前往偏好设置激活。"];
+    } else if ([dLanguage isEqualToString:@"ja-JP"]) {
+        return @[@"macOSをアクティブ化", @"「システム環境設定」アクティブ化に行ってください。"];
+    } else {
+        NSLog(@"Language: %@\n", dLanguage);
+        return @[@"Activate macOS", @"Go to “System Preferences” to activate macOS."];
+    }
+}
+
 - (void)drawRect:(NSRect)dirtyRect {
     
-    NSAttributedString *firstLine = [[NSAttributedString alloc] initWithString:@"Activate macOS"
+    NSArray<NSString *>* strings = [self getString];
+    
+    NSAttributedString *firstLine = [[NSAttributedString alloc] initWithString:strings[0]
                                                                     attributes:@{ NSFontAttributeName: [NSFont systemFontOfSize:24.0],
                                                                                   NSForegroundColorAttributeName: [NSColor colorWithWhite:0.57 alpha:0.5],
                                                                                }];
     
-    NSAttributedString *secondLine = [[NSAttributedString alloc] initWithString:@"Go to “System Preferences” to activate macOS."
+    NSAttributedString *secondLine = [[NSAttributedString alloc] initWithString:strings[1]
                                                                      attributes:@{ NSFontAttributeName: [NSFont systemFontOfSize:13.0],
                                                                                    NSForegroundColorAttributeName: [NSColor colorWithWhite:0.57 alpha:0.5],
                                                                                 }];
