@@ -139,7 +139,7 @@
     NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
     NSArray *languages = [defs objectForKey:@"AppleLanguages"];
     NSString *dLanguage = [languages objectAtIndex:0];
-    if ([dLanguage isEqualToString:@"zh-Hans"]) {
+    if ([dLanguage isEqualToString:@"zh-Hans"] || [dLanguage isEqualToString:@"zh-Hans-CN"]) {
         return @[@"激活 macOS", @"您当前所使用的可能是盗版 macOS 副本，请前往偏好设置激活。"];
     } else if ([dLanguage isEqualToString:@"ja-JP"]) {
         return @[@"macOS をアクティブ化", @"「システム環境設定」アクティブ化に行ってください。"];
@@ -162,7 +162,14 @@
                                                                                    NSForegroundColorAttributeName: [NSColor colorWithWhite:0.57 alpha:0.5],
                                                                                 }];
 
-    CGFloat xPosition = self.bounds.size.width - 400;
+    CGRect firstLineRect = [firstLine boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
+                                                    options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading];
+    CGRect secondLineRect = [secondLine boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
+                                                     options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading];
+
+    CGFloat decisionWidth = MAX(firstLineRect.size.width, secondLineRect.size.width);
+
+    CGFloat xPosition = self.bounds.size.width - 125 - decisionWidth; // padding to right 125
     [firstLine drawAtPoint:CGPointMake(xPosition, 134)];
     [secondLine drawAtPoint:CGPointMake(xPosition, 116)];
 }
