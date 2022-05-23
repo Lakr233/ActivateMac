@@ -102,6 +102,10 @@
     return NO;
 }
 
+- (NSWindowCollectionBehavior)collectionBehavior {
+    return NSWindowCollectionBehaviorStationary;
+}
+
 @end
 
 
