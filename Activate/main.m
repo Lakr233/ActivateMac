@@ -143,12 +143,15 @@
     NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
     NSArray *languages = [defs objectForKey:@"AppleLanguages"];
     NSString *dLanguage = [languages objectAtIndex:0];
+    
+    // macOS' localization prefers to not add spacing between text,
+    // as it has built-in 1/4 spacing between Chinese and English character.
     if ([dLanguage isEqualToString:@"zh-Hans"] || [dLanguage isEqualToString:@"zh-Hans-CN"]) {
-        return @[@"激活 macOS", @"您当前所使用的可能是盗版 macOS 副本，请前往偏好设置激活。"];
+        return @[@"激活macOS", @"您当前所使用的可能是盗版macOS副本，请前往偏好设置激活。"];
     } else if ([dLanguage isEqualToString:@"zh-Hant"] || [dLanguage isEqualToString:@"zh-Hant-TW"]) {
-        return @[@"啟用 macOS", @"您目前使用的可能是盜版 macOS 副本。請前往「系統偏好設定」啟用。"];
+        return @[@"啟用macOS", @"您目前使用的可能是盜版macOS副本。請前往「系統偏好設定」啟用。"];
     } else if ([dLanguage isEqualToString:@"ja-JP"]) {
-        return @[@"macOS をアクティブ化", @"「システム環境設定」アクティブ化に行ってください。"];
+        return @[@"macOSをアクティブ化", @"「システム環境設定」アクティブ化に行ってください。"];
     } else {
         NSLog(@"Language: %@\n", dLanguage);
         return @[@"Activate macOS", @"Go to System Preferences to activate macOS."];
