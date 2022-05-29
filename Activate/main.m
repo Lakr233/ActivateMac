@@ -88,8 +88,8 @@
     [self setBackgroundColor:[NSColor clearColor]];
     [self setIgnoresMouseEvents:YES];
     [self setMovable:NO];
-    [self setCollectionBehavior:0x101];
-    [self setLevel:2005];
+    [self setCollectionBehavior:NSWindowCollectionBehaviorFullScreenAuxiliary | NSWindowCollectionBehaviorStationary];
+    [self setLevel:kCGStatusWindowLevel];
     [self setHasShadow:NO];
     return self;
 }
@@ -103,7 +103,7 @@
 }
 
 - (NSWindowCollectionBehavior)collectionBehavior {
-    return NSWindowCollectionBehaviorStationary;
+    return NSWindowCollectionBehaviorFullScreenAuxiliary | NSWindowCollectionBehaviorStationary;
 }
 
 @end
