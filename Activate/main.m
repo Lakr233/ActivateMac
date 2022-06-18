@@ -88,8 +88,8 @@
     [self setBackgroundColor:[NSColor clearColor]];
     [self setIgnoresMouseEvents:YES];
     [self setMovable:NO];
-    [self setCollectionBehavior:0x101];
-    [self setLevel:2005];
+    [self setCollectionBehavior:NSWindowCollectionBehaviorFullScreenAuxiliary | NSWindowCollectionBehaviorStationary];
+    [self setLevel:kCGStatusWindowLevel];
     [self setHasShadow:NO];
     return self;
 }
@@ -100,6 +100,10 @@
 
 - (BOOL)canBecomeMainWindow {
     return NO;
+}
+
+- (NSWindowCollectionBehavior)collectionBehavior {
+    return NSWindowCollectionBehaviorFullScreenAuxiliary | NSWindowCollectionBehaviorStationary;
 }
 
 @end
@@ -141,8 +145,12 @@
     NSString *dLanguage = [languages objectAtIndex:0];
     if ([dLanguage isEqualToString:@"zh-Hans"] || [dLanguage isEqualToString:@"zh-Hans-CN"]) {
         return @[@"激活 macOS", @"您当前所使用的可能是盗版 macOS 副本，请前往偏好设置激活。"];
+    } else if ([dLanguage isEqualToString:@"zh-Hant"] || [dLanguage isEqualToString:@"zh-Hant-TW"]) {
+        return @[@"啟用 macOS", @"您目前使用的可能是盜版 macOS 副本。請前往「系統偏好設定」啟用。"];
     } else if ([dLanguage isEqualToString:@"ja-JP"]) {
         return @[@"macOS のライセンス認証", @"システム環境設定を開き、macOSのライセンス認証を行ってください"];
+    } else if ([dLanguage isEqualToString:@"pl-PL"]) {
+        return @[@"Aktywuj system macOS", @"Przejdź do ustawień, aby aktywować system macOS."];
     } else {
         NSLog(@"Language: %@\n", dLanguage);
         return @[@"Activate macOS", @"Go to System Preferences to activate macOS."];
