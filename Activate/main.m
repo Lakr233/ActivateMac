@@ -148,7 +148,7 @@
     } else if ([dLanguage isEqualToString:@"zh-Hant"] || [dLanguage isEqualToString:@"zh-Hant-TW"]) {
         return @[@"啟用 macOS", @"您目前使用的可能是盜版 macOS 副本。請前往「系統偏好設定」啟用。"];
     } else if ([dLanguage isEqualToString:@"ja-JP"]) {
-        return @[@"macOS をアクティブ化", @"「システム環境設定」アクティブ化に行ってください。"];
+        return @[@"macOS のライセンス認証", @"システム環境設定を開き、macOSのライセンス認証を行ってください"];
     } else if ([dLanguage isEqualToString:@"pl-PL"]) {
         return @[@"Aktywuj system macOS", @"Przejdź do ustawień, aby aktywować system macOS."];
     } else {
