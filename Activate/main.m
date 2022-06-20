@@ -151,6 +151,8 @@
         return @[@"macOS のライセンス認証", @"システム環境設定を開き、macOSのライセンス認証を行ってください"];
     } else if ([dLanguage isEqualToString:@"pl-PL"]) {
         return @[@"Aktywuj system macOS", @"Przejdź do ustawień, aby aktywować system macOS."];
+    } else if ([dLanguage isEqualToString:@"ru-RU"]) {
+        return @[@"Активация macOS", @"Чтобы активировать macOS, перейдите в раздел \"Параметры\"."];
     } else {
         NSLog(@"Language: %@\n", dLanguage);
         return @[@"Activate macOS", @"Go to System Preferences to activate macOS."];
