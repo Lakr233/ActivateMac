@@ -153,6 +153,10 @@
         return @[@"Aktywuj system macOS", @"Przejdź do ustawień, aby aktywować system macOS."];
     } else if ([dLanguage isEqualToString:@"ru-RU"]) {
         return @[@"Активация macOS", @"Чтобы активировать macOS, перейдите в раздел \"Параметры\"."];
+    } else if ([dLanguage isEqualToString:@"de-DE"]) {
+        return @[@"macOS aktivieren", @"Wechseln Sie zu den Systemeinstellungen, um macOS zu aktivieren."];
+    } else if ([dLanguage isEqualToString:@"tr-TR"]) {
+        return @[@"macOS'i Etkinleştir", @"macOS'i etkinleştirmek için Ayarlar'a gidin."];
     } else {
         NSLog(@"Language: %@\n", dLanguage);
         return @[@"Activate macOS", @"Go to System Preferences to activate macOS."];
