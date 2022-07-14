@@ -25,7 +25,7 @@ Open Xcode and run.
 
 ## Demo
 
-When you successfully install the app, You will be able to launch "Activate" from your Launchpad. once you do, You would see something like this on the bottom right of your screen:
+When you successfully install the app, you will be able to launch "Activate" from your Launchpad. Once you do, you would see something like this on the bottom right of your screen:
 
 ![Preview](./Resources/Preview.png)
 
