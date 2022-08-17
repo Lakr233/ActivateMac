@@ -140,8 +140,8 @@
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
-    NSString *title = NSLocalizedString(@"TITLE", @"");
-    NSString *description = NSLocalizedString(@"DESCRIPTION", @"");
+    NSString *title = @"macOS 12 Pro Insider Preview";
+    NSString *description = @"Evaluation copy. Build 25169.rs_prerelease.220723-1625";
 
     NSAttributedString *firstLine = [[NSAttributedString alloc] initWithString:title
                                                                     attributes:@{ NSFontAttributeName: [NSFont systemFontOfSize:24.0],
