@@ -144,6 +144,12 @@
     return [super initWithFrame:CGRectZero];
 }
 
+- (void)dealloc
+{
+    [self.animationTimer invalidate];
+    self.animationTimer = nil;
+}
+
 - (void)doAnimationYouWant
 {
     self.animationTitle = [self currentTime];
