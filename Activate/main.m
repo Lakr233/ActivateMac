@@ -22,6 +22,8 @@
 @end
 
 @interface AppView : NSView
+@property (nonatomic, strong) NSTimer *animationTimer;
+@property (nonatomic, strong) NSString *animationTitle;
 @end
 
 
@@ -136,15 +138,38 @@
 @implementation AppView
 
 - (instancetype)init {
+    self.animationTitle = [self currentTime];
+    self.animationTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(doAnimationYouWant) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.animationTimer forMode:NSRunLoopCommonModes];
     return [super initWithFrame:CGRectZero];
 }
 
+- (void)doAnimationYouWant
+{
+    self.animationTitle = [self currentTime];
+    [self setNeedsDisplay:YES];
+}
+
+- (NSString *)currentTime
+{
+    NSDate *currentDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+    return [dateFormatter stringFromDate:currentDate];
+}
+
 - (void)drawRect:(NSRect)dirtyRect {
+    
     NSString *title = @"macOS 12 Pro Insider Preview";
     NSString *description = @"Evaluation copy. Build 25169.rs_prerelease.220723-1625";
 
     NSAttributedString *firstLine = [[NSAttributedString alloc] initWithString:title
                                                                     attributes:@{ NSFontAttributeName: [NSFont systemFontOfSize:24.0],
+                                                                                  NSForegroundColorAttributeName: [NSColor colorWithWhite:0.57 alpha:0.5],
+                                                                               }];
+    
+    NSAttributedString *timeLine = [[NSAttributedString alloc] initWithString:self.animationTitle?:@""
+                                                                    attributes:@{ NSFontAttributeName: [NSFont systemFontOfSize:13],
                                                                                   NSForegroundColorAttributeName: [NSColor colorWithWhite:0.57 alpha:0.5],
                                                                                }];
 
@@ -162,6 +187,7 @@
 
     CGFloat xPosition = self.bounds.size.width - 125 - decisionWidth; // padding to right 125
     [firstLine drawAtPoint:CGPointMake(xPosition, 134)];
+    [timeLine drawAtPoint:CGPointMake(xPosition + firstLineRect.size.width + 10, 137)];
     [secondLine drawAtPoint:CGPointMake(xPosition, 116)];
 }
 
