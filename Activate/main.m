@@ -143,7 +143,34 @@
     NSString *title = NSLocalizedString(@"TITLE", @"");
     NSString *description = NSLocalizedString(@"DESCRIPTION", @"");
 
-    NSAttributedString *firstLine = [[NSAttributedString alloc] initWithString:title
+    // check if screen height is larger than 1500px
+    if (self.bounds.size.height > 1500) {
+        // print height
+        NSLog(@"%f", self.bounds.size.height);
+        NSAttributedString *firstLine = [[NSAttributedString alloc] initWithString:title
+                                                                    attributes:@{ NSFontAttributeName: [NSFont systemFontOfSize:36.0],
+                                                                                  NSForegroundColorAttributeName: [NSColor colorWithWhite:0.57 alpha:0.5],
+                                                                               }];
+
+    NSAttributedString *secondLine = [[NSAttributedString alloc] initWithString:description
+                                                                     attributes:@{ NSFontAttributeName: [NSFont systemFontOfSize:20.0],
+                                                                                   NSForegroundColorAttributeName: [NSColor colorWithWhite:0.57 alpha:0.5],
+                                                                                }];
+
+    CGRect firstLineRect = [firstLine boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
+                                                    options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading];
+    CGRect secondLineRect = [secondLine boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
+                                                     options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading];
+
+    CGFloat decisionWidth = MAX(firstLineRect.size.width, secondLineRect.size.width);
+
+    CGFloat xPosition = self.bounds.size.width - 125 - decisionWidth; // padding to right 125
+    [firstLine drawAtPoint:CGPointMake(xPosition, 150)];
+    [secondLine drawAtPoint:CGPointMake(xPosition, 125)];
+    } else {
+        //print height
+        NSLog(@"%f", self.bounds.size.height);
+NSAttributedString *firstLine = [[NSAttributedString alloc] initWithString:title
                                                                     attributes:@{ NSFontAttributeName: [NSFont systemFontOfSize:24.0],
                                                                                   NSForegroundColorAttributeName: [NSColor colorWithWhite:0.57 alpha:0.5],
                                                                                }];
@@ -163,6 +190,9 @@
     CGFloat xPosition = self.bounds.size.width - 125 - decisionWidth; // padding to right 125
     [firstLine drawAtPoint:CGPointMake(xPosition, 134)];
     [secondLine drawAtPoint:CGPointMake(xPosition, 116)];
+    }
+
+    
 }
 
 @end
