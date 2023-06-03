@@ -4,14 +4,8 @@
 //
 //  Created by Lessica <82flex@gmail.com> on 2022/5/17.
 //
+
 #import <AppKit/AppKit.h>
-//#ifndef let
-//#define let __auto_type const
-//#endif
-//
-//#ifndef var
-//#define var __auto_type
-//#endif
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 @end
