@@ -4,9 +4,14 @@
 //
 //  Created by Lessica <82flex@gmail.com> on 2022/5/17.
 //
-
 #import <AppKit/AppKit.h>
-
+//#ifndef let
+//#define let __auto_type const
+//#endif
+//
+//#ifndef var
+//#define var __auto_type
+//#endif
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 @end
@@ -142,7 +147,13 @@
 - (void)drawRect:(NSRect)dirtyRect {
     NSString *title = NSLocalizedString(@"TITLE", @"");
     NSString *description = NSLocalizedString(@"DESCRIPTION", @"");
-
+    
+    // check if running macOS ventura and newer, and if so use the ventura description string
+    NSOperatingSystemVersion venturaVersion = { .majorVersion = 13, .minorVersion = 0, .patchVersion = 0 };
+    BOOL useSystemSettings = [NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:venturaVersion];
+    if (useSystemSettings) {
+        description = NSLocalizedString(@"DESCRIPTION_VENTURA", @"");
+    }
     // check if screen height is larger than 1500px
     if (self.bounds.size.height > 1500) {
         // print height
