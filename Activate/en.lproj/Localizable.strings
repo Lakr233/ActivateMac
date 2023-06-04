@@ -1,2 +1,3 @@
 TITLE = "Activate macOS";
 DESCRIPTION = "Go to System Preferences to activate macOS.";
+DESCRIPTION_VENTURA = "Go to System Settings to activate macOS.";
