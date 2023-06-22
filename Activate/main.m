@@ -36,17 +36,17 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
     [self bootstrap];
     [[NSNotificationCenter defaultCenter]
-        addObserver:self
-           selector:@selector(bootstrap)
-               name:NSApplicationDidChangeScreenParametersNotification
-             object:nil];
-
+     addObserver:self
+     selector:@selector(bootstrap)
+     name:NSApplicationDidChangeScreenParametersNotification
+     object:nil];
+    
     // To show dock icon, comment this line.
     [NSApp setActivationPolicy:NSApplicationActivationPolicyAccessory];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:
-    (NSApplication *)sender {
+(NSApplication *)sender {
     return YES;
 }
 
@@ -55,16 +55,16 @@
         [windowCtrl close];
     }
     [_windowControllers removeAllObjects];
-
+    
     for (NSScreen *screen in [NSScreen screens]) {
         [_windowControllers
-            addObject:[self createWindowControllerForScreen:screen]];
+         addObject:[self createWindowControllerForScreen:screen]];
     }
 }
 
 - (NSWindowController *)createWindowControllerForScreen:(NSScreen *)screen {
     NSWindowController *ctrl =
-        [[AppWindowController alloc] initWithScreen:screen];
+    [[AppWindowController alloc] initWithScreen:screen];
     [[ctrl window] setFrameOrigin:screen.frame.origin];
     [[ctrl window] setContentSize:screen.frame.size];
     [[ctrl window] makeKeyAndOrderFront:nil];
@@ -82,7 +82,7 @@
                               backing:NSBackingStoreBuffered
                                 defer:NO
                                screen:screen];
-
+    
     [self setOpaque:NO];
     [self setAlphaValue:1];
     [self setTitleVisibility:NSWindowTitleHidden];
@@ -91,8 +91,8 @@
     [self setIgnoresMouseEvents:YES];
     [self setMovable:NO];
     [self setCollectionBehavior:NSWindowCollectionBehaviorFullScreenAuxiliary |
-                                NSWindowCollectionBehaviorStationary |
-                                NSWindowCollectionBehaviorCanJoinAllSpaces];
+     NSWindowCollectionBehaviorStationary |
+     NSWindowCollectionBehaviorCanJoinAllSpaces];
     [self setLevel:kCGStatusWindowLevel];
     [self setHasShadow:NO];
     return self;
@@ -108,8 +108,8 @@
 
 - (NSWindowCollectionBehavior)collectionBehavior {
     return NSWindowCollectionBehaviorFullScreenAuxiliary |
-           NSWindowCollectionBehaviorStationary |
-           NSWindowCollectionBehaviorCanJoinAllSpaces;
+    NSWindowCollectionBehaviorStationary |
+    NSWindowCollectionBehaviorCanJoinAllSpaces;
 }
 
 @end
@@ -145,85 +145,67 @@
 - (void)drawRect:(NSRect)dirtyRect {
     NSString *title = NSLocalizedString(@"TITLE", @"");
     NSString *description = NSLocalizedString(@"DESCRIPTION", @"");
-
+    
     // check if running macOS ventura and newer, and if so use the ventura
     // description string
-    NSOperatingSystemVersion venturaVersion = {
-        .majorVersion = 13, .minorVersion = 0, .patchVersion = 0};
-    BOOL useSystemSettings = [NSProcessInfo.processInfo
-        isOperatingSystemAtLeastVersion:venturaVersion];
-    if (useSystemSettings) {
-        description = NSLocalizedString(@"DESCRIPTION_VENTURA", @"");
-    }
+    NSOperatingSystemVersion venturaVersion = {.majorVersion = 13, .minorVersion = 0, .patchVersion = 0};
+    BOOL useSystemSettings = [NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:venturaVersion];
+    if (useSystemSettings) { description = NSLocalizedString(@"DESCRIPTION_VENTURA", @""); }
+    
     // check if screen height is larger than 1500px
     if (self.bounds.size.height > 1500) {
-        // print height
-        NSLog(@"%f", self.bounds.size.height);
-        NSAttributedString *firstLine = [[NSAttributedString alloc]
-            initWithString:title
-                attributes:@{
-                    NSFontAttributeName : [NSFont systemFontOfSize:36.0],
-                    NSForegroundColorAttributeName :
-                        [NSColor colorWithWhite:0.57 alpha:0.5],
-                }];
-
-        NSAttributedString *secondLine = [[NSAttributedString alloc]
-            initWithString:description
-                attributes:@{
-                    NSFontAttributeName : [NSFont systemFontOfSize:20.0],
-                    NSForegroundColorAttributeName :
-                        [NSColor colorWithWhite:0.57 alpha:0.5],
-                }];
-
+//        NSLog(@"%f", self.bounds.size.height);
+        NSAttributedString *firstLine = [[NSAttributedString alloc] initWithString:title attributes:@{
+            NSFontAttributeName : [NSFont systemFontOfSize:36.0],
+            NSForegroundColorAttributeName : [NSColor colorWithWhite:0.57 alpha:0.5],
+        }];
+        NSAttributedString *secondLine = [[NSAttributedString alloc] initWithString:description attributes:@{
+            NSFontAttributeName : [NSFont systemFontOfSize:20.0],
+            NSForegroundColorAttributeName : [NSColor colorWithWhite:0.57 alpha:0.5],
+        }];
+        
         CGRect firstLineRect = [firstLine
-            boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
-                         options:NSStringDrawingUsesLineFragmentOrigin |
-                                 NSStringDrawingUsesFontLeading];
+                                boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
+                                options:NSStringDrawingUsesLineFragmentOrigin |
+                                NSStringDrawingUsesFontLeading];
         CGRect secondLineRect = [secondLine
-            boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
-                         options:NSStringDrawingUsesLineFragmentOrigin |
+                                 boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
+                                 options:NSStringDrawingUsesLineFragmentOrigin |
                                  NSStringDrawingUsesFontLeading];
-
+        
         CGFloat decisionWidth =
-            MAX(firstLineRect.size.width, secondLineRect.size.width);
-
+        MAX(firstLineRect.size.width, secondLineRect.size.width);
+        
         CGFloat xPosition = self.bounds.size.width - 125 -
-                            decisionWidth;  // padding to right 125
+        decisionWidth;  // padding to right 125
         [firstLine drawAtPoint:CGPointMake(xPosition, 150)];
         [secondLine drawAtPoint:CGPointMake(xPosition, 125)];
     } else {
         // print height
         NSLog(@"%f", self.bounds.size.height);
-        NSAttributedString *firstLine = [[NSAttributedString alloc]
-            initWithString:title
-                attributes:@{
-                    NSFontAttributeName : [NSFont systemFontOfSize:24.0],
-                    NSForegroundColorAttributeName :
-                        [NSColor colorWithWhite:0.57 alpha:0.5],
-                }];
-
-        NSAttributedString *secondLine = [[NSAttributedString alloc]
-            initWithString:description
-                attributes:@{
-                    NSFontAttributeName : [NSFont systemFontOfSize:13.0],
-                    NSForegroundColorAttributeName :
-                        [NSColor colorWithWhite:0.57 alpha:0.5],
-                }];
-
+        NSAttributedString *firstLine = [[NSAttributedString alloc] initWithString:title attributes:@{
+            NSFontAttributeName : [NSFont systemFontOfSize:24.0],
+            NSForegroundColorAttributeName : [NSColor colorWithWhite:0.57 alpha:0.5],
+        }];
+        
+        NSAttributedString *secondLine = [[NSAttributedString alloc] initWithString:description attributes:@{
+            NSFontAttributeName : [NSFont systemFontOfSize:13.0],
+            NSForegroundColorAttributeName : [NSColor colorWithWhite:0.57 alpha:0.5],
+        }];
+        
         CGRect firstLineRect = [firstLine
-            boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
-                         options:NSStringDrawingUsesLineFragmentOrigin |
-                                 NSStringDrawingUsesFontLeading];
+                                boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
+                                options:NSStringDrawingUsesLineFragmentOrigin |
+                                NSStringDrawingUsesFontLeading];
         CGRect secondLineRect = [secondLine
-            boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
-                         options:NSStringDrawingUsesLineFragmentOrigin |
+                                 boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
+                                 options:NSStringDrawingUsesLineFragmentOrigin |
                                  NSStringDrawingUsesFontLeading];
-
+        
         CGFloat decisionWidth =
-            MAX(firstLineRect.size.width, secondLineRect.size.width);
-
-        CGFloat xPosition = self.bounds.size.width - 125 -
-                            decisionWidth;  // padding to right 125
+        MAX(firstLineRect.size.width, secondLineRect.size.width);
+        
+        CGFloat xPosition = self.bounds.size.width - 125 - decisionWidth;  // padding to right 125
         [firstLine drawAtPoint:CGPointMake(xPosition, 134)];
         [secondLine drawAtPoint:CGPointMake(xPosition, 116)];
     }
